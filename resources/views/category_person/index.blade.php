@@ -1,0 +1,155 @@
+@extends('layouts.template')
+@section('content')
+    <div class="max-w-7xl mt-10 ">
+
+            <h2 class="text-2xl font-bold mb-6 dark:text-white font-playfair">Category List</h2>
+
+
+
+        {{--<a href="{{ route('category_people.create') }}" class="inline-flex items-center bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-950 mb-6 font-playfair">
+            <svg class="w-6 h-6 text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
+            Create New Category
+        </a>--}}
+        <a href="{{ route('category_people.create') }}" class="inline-flex items-center px-3 py-2 mb-4 text-sm font-medium text-center text-white rounded-lg bg-blue-800 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+            <svg class="w-6 h-6 text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
+            Create New Category
+        </a>
+
+
+        <table class="min-w-full bg-white text-gray-900 shadow rounded-lg dark:bg-neutral-800 dark:text-white font-playfair">
+            <thead class="bg-blue-800 text-gray-100 dark:bg-blue-900 dark:text-white">
+            <tr>
+                <th class="py-2 px-4 border-b text-left">ID</th>
+                <th class="py-2 px-4 border-b text-left">Name</th>
+                <th class="py-2 px-4 border-b text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($categories as $category)
+                <tr>
+                    <td class="py-2 px-4 border-b">{{ $category->id }}</td>
+                    <td class="py-2 px-4 border-b">{{ $category->name }}</td>
+                    <td class="py-2 px-4 border-b text-center">
+                        {{--<a href="{{ route('category_people.show', $category->id) }}" class="text-blue-500 hover:underline">
+                            View
+                        </a>--}}
+                        <a href="{{ route('category_people.edit', $category->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+
+
+                        </a>
+                        <!-- Bouton de suppression -->
+                        {{--<form action="{{ route('category_people.destroy', $category->id) }}" method="POST" id="delete-form" class="inline-block ml-4">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300" data-modal-toggle="delete-user-modal">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </form>--}}
+                        <form action="{{ route('category_people.destroy', $category->id) }}" method="POST" id="delete-form" class="inline-block ml-4">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" onclick="toggleModal()" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </form>
+
+
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        <div class="mt-4">
+            {{ $categories->links() }}
+        </div>
+    </div>
+
+    <!-- Delete User Modal -->
+    <!-- Delete User Modal -->
+{{--
+    <div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full" id="delete-user-modal">
+        <div class="relative w-full h-full max-w-md px-4 md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+                <!-- Modal header -->
+                <div class="flex justify-end p-2">
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-modal-toggle="delete-user-modal">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-6 pt-0 text-center">
+                    <svg class="w-16 h-16 mx-auto text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h3 class="mt-5 mb-6 text-lg text-gray-500 dark:text-gray-400">Are you sure you want to delete this user?</h3>
+                    <a href="#" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-800">
+                        Yes, I'm sure
+                    </a>
+                    <a href="#" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700" data-modal-toggle="delete-user-modal">
+                        No, cancel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+--}}
+    <!-- Delete User Modal -->
+    <div id="delete-user-modal" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="bg-black opacity-50 absolute inset-0" onclick="toggleModal()"></div> <!-- Fond sombre -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-800 z-10 max-w-md w-full p-6">
+            <!-- Modal header -->
+            <div class="flex justify-end p-2">
+                <button type="button" onclick="toggleModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="text-center">
+                <svg class="w-16 h-16 mx-auto text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="mt-5 mb-6 text-lg text-gray-500 dark:text-gray-400">Are you sure you want to delete this user?</h3>
+                <button onclick="confirmDelete()" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
+                    Yes, I'm sure
+                </button>
+                <button type="button" onclick="toggleModal()" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center">
+                    No, cancel
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Button -->
+    {{--<form action="{{ route('category_people.destroy', $category->id) }}" method="POST" id="delete-form" class="inline-block ml-4">
+        @csrf
+        @method('DELETE')
+        <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300" onclick="toggleModal()">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+            </svg>
+        </button>
+    </form>--}}
+
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('delete-user-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function confirmDelete() {
+            document.getElementById('delete-form').submit();
+        }
+    </script>
+
+@endsection
+
+
+
