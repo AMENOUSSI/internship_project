@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Affaire;
+use App\Models\Assureur;
+use App\Models\Client;
 use App\Models\Police;
 use Illuminate\Http\Request;
 
@@ -12,7 +15,7 @@ class PoliceController extends Controller
      */
     public function index()
     {
-        //
+        return view('polices.index');
     }
 
     /**
@@ -20,7 +23,10 @@ class PoliceController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::all();
+        $affaires = Affaire::all();
+        $assureurs = Assureur::all();
+        return view('polices.create',compact('clients','affaires','assureurs'));
     }
 
     /**

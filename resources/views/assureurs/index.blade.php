@@ -1,12 +1,12 @@
 @extends('layouts.template')
 
 @section('content')
-    <div class="container mx-auto text-gray-100 bg-gray-900 p-8 rounded">
+    <div class="container mx-auto dark:text-gray-100 dark:bg-gray-900 p-8 rounded">
         <h1 class="text-3xl font-bold mb-6">Liste des Assureurs</h1>
 
         <a href="{{ route('assureurs.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded mb-4 inline-block">Ajouter un Assureur</a>
 
-        <table class="w-full bg-gray-800 rounded overflow-hidden">
+        <table class="w-full dark:bg-gray-800 rounded overflow-hidden">
             <thead class="bg-gray-700">
             <tr>
                 <th class="py-3 px-4">ID</th>

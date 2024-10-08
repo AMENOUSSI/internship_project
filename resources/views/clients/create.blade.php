@@ -8,12 +8,15 @@
             <div class="grid grid-cols-3 gap-6">
                 <div>
                     <label for="complete_name" class="block font-medium text-gray-700 dark:text-gray-300">Nom Complet</label>
-                    <input type="text" name="complete_name" id="complete_name" class="w-full border border-gray-300 p-2 rounded" required>
+                    <input type="text" name="complete_name" id="complete_name" class="w-full border border-gray-300 p-2 rounded" >
+                    @error('complete_name')
+                    <div class="bg-red-500 text-white"></div>
+                    @enderror
                 </div>
 
                 <div>
                     <label for="type_client" class="block font-medium text-gray-700 dark:text-gray-300">Type de Client</label>
-                    <input type="text" name="type_client" id="type_client" class="w-full border border-gray-300 p-2 rounded" required>
+                    <input type="text" name="type_client" id="type_client" class="w-full border border-gray-300 p-2 rounded" >
                 </div>
 
                 <div>
@@ -23,22 +26,22 @@
 
                 <div>
                     <label for="created_date" class="block font-medium text-gray-700 dark:text-gray-300">Date de Création</label>
-                    <input type="datetime-local" name="created_date" id="created_date" class="w-full border border-gray-300 p-2 rounded" required>
+                    <input type="datetime-local" name="created_date" id="created_date" class="w-full border border-gray-300 p-2 rounded" >
                 </div>
 
                 <div>
                     <label for="phone_number" class="block font-medium text-gray-700 dark:text-gray-300">Numéro de Téléphone</label>
-                    <input type="text" name="phone_number" id="phone_number" class="w-full border border-gray-300 p-2 rounded" required>
+                    <input type="text" name="phone_number" id="phone_number" class="w-full border border-gray-300 p-2 rounded" >
                 </div>
 
                 <div>
                     <label for="birth_date" class="block font-medium text-gray-700 dark:text-gray-300">Date de Naissance</label>
-                    <input type="date" name="birth_date" id="birth_date" class="w-full border border-gray-300 p-2 rounded" required>
+                    <input type="date" name="birth_date" id="birth_date" class="w-full border border-gray-300 p-2 rounded" >
                 </div>
 
                 <div>
                     <label for="gender" class="block font-medium text-gray-700 dark:text-gray-300">Genre</label>
-                    <select name="gender" id="gender" class="w-full border border-gray-300 p-2 rounded" required>
+                    <select name="gender" id="gender" class="w-full border border-gray-300 p-2 rounded" >
                         <option value="Femme">Femme</option>
                         <option value="Homme">Homme</option>
                     </select>

@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
-    <div class="container mx-auto text-gray-100 bg-gray-900 p-8 rounded">
+    <div class="container mx-auto text-white bg-gray-400 dark:text-gray-100 dark:bg-gray-900 p-8 rounded">
         <h1 class="text-3xl font-bold mb-6">{{ isset($assureur) ? 'Modifier' : 'Ajouter' }} un Assureur</h1>
 
         <form action="{{ isset($assureur) ? route('assureurs.update', $assureur->id) : route('assureurs.store') }}" method="POST">
@@ -32,7 +32,10 @@
         function generateSlug() {
             const nameInput = document.getElementById('name');
             const slugInput = document.getElementById('slug');
-            slugInput.value = nameInput.value.trim().toLowerCase().replace(/[\s\W-]+/g, '-');
+            const initials = nameInput.value.trim().split(/\s+/).map(word => word[0]).join('').toUpperCase();
+
+            // Mettre à jour le champ slug
+            slugInput.value = initials;
         }
     </script>
 @endsection

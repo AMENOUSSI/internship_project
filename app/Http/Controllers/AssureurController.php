@@ -4,62 +4,58 @@ namespace App\Http\Controllers;
 
 use App\Models\Assureur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AssureurController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $assureurs = Assureur::all();
+        return view('assureurs.index', compact('assureurs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('assureurs.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255|unique:assureurs,name',
+        ]);
+
+        /*Assureur::create([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+        ]);*/
+        Assureur::create($request->all());
+
+        return redirect()->route('assureurs.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Assureur $assureur)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Assureur $assureur)
     {
-        //
+        return view('assureurs.create', compact('assureur'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Assureur $assureur)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255|unique:assureurs,name,' . $assureur->id,
+        ]);
+
+        $assureur->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+        ]);
+
+        return redirect()->route('assureurs.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Assureur $assureur)
     {
-        //
+        $assureur->delete();
+        return redirect()->route('assureurs.index');
     }
 }

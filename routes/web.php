@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AffaireController;
+use App\Http\Controllers\AssureurController;
 use App\Http\Controllers\CategoryPersonController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MouvementPoliceController;
+use App\Http\Controllers\PoliceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('clients', ClientController::class);
     Route::resource('affaires', AffaireController::class);
     Route::resource('mouvements', MouvementPoliceController::class);
-    Route::resource('assureurs', \App\Http\Controllers\AssureurController::class);
+    Route::resource('assureurs', AssureurController::class);
+    Route::resource('polices',PoliceController::class);
 
 
 
