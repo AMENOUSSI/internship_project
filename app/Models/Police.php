@@ -20,17 +20,17 @@ class Police extends Model
         'reference'
     ];
 
-    public function clients()
+    public function client()
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function affaires()
+    public function affaire()
     {
         return $this->belongsTo(Affaire::class);
     }
 
-    public function assureurs()
+    public function assureur()
     {
         return $this->belongsTo(Assureur::class);
     }

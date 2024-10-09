@@ -1,4 +1,5 @@
-<x-app-layout>
+@extends('layouts.template')
+@section('content')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Two factor authentication') }}
@@ -43,7 +44,7 @@
                     </div>
 
                     <div class="mt-4">
-                    @if(session('status') == 'two-factor-authentication-enabled')
+                        @if(session('status') == 'two-factor-authentication-enabled')
                             <p class="text-neutral-600 dark:text-gray-300">
                                 {{ __('You have now enabled 2FA, please scan the following QR code into your authenticator application.') }}
                             </p>
@@ -62,10 +63,10 @@
                                     <li class="my-1">{{ trim($code) }}</li>
                                 @endforeach
                             </ul>
-                    @endif
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

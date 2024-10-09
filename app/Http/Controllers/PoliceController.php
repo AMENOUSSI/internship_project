@@ -15,7 +15,12 @@ class PoliceController extends Controller
      */
     public function index()
     {
-        return view('polices.index');
+        $clients = Client::all();
+        $affaires = Affaire::all();
+        $assureurs = Assureur::all();
+        $polices = Police::with(['client', 'assureur', 'affaire'])->get();
+        return view('polices.index',compact('polices','clients','affaires','assureurs'));
+
     }
 
     /**
@@ -34,7 +39,22 @@ class PoliceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'assureur_id' => 'required|exists:assureurs,id',
+            'affaire_id' => 'required|exists:affaires,id',
+            'assurance_type' => 'required|string',
+            'starting_date' => 'required|date',
+            'ending_date' => 'required|date',
+            'reference' => 'nullable|string',
+        ]);
+
+        Police::updateOrCreate(
+            ['id' => $request->id],
+            $validated
+        );
+
+        return redirect()->route('polices.index')->with('success', 'Police   enregistrée avec succès');
     }
 
     /**

@@ -35,7 +35,7 @@
             <!-- Starting Date -->
             <div class="mb-4">
                 <label for="starting_date" class="block text-sm font-medium text-gray-700">Date de Début</label>
-                <input type="datetime-local" name="starting_date" id="starting_date" value="{{ old('starting_date', $mouvement->starting_date->format('Y-m-d\TH:i')) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                <input type="datetime-local" name="starting_date" id="starting_date" value="{{ old('starting_date', $mouvement->starting_date) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                 @error('starting_date')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
@@ -44,7 +44,7 @@
             <!-- Ending Date -->
             <div class="mb-4">
                 <label for="ending_date" class="block text-sm font-medium text-gray-700">Date de Fin</label>
-                <input type="datetime-local" name="ending_date" id="ending_date" value="{{ old('ending_date', $mouvement->ending_date->format('Y-m-d\TH:i')) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                <input type="datetime-local" name="ending_date" id="ending_date" value="{{ old('ending_date', $mouvement->ending_date) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                 @error('ending_date')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror

@@ -31,4 +31,14 @@ class Client extends Model
     {
         return $this->hasMany(Affaire::class);
     }
+
+    public function polices()
+    {
+        return $this->hasMany(Police::class);
+    }
+
+    public function mouvement()
+    {
+        return $this->hasOne(MouvementPolice::class);
+    }
 }

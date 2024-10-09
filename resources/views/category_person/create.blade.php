@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mx-auto mt-10">
-        <h2 class="text-2xl font-bold mb-6 dark:text-white">Create New Category</h2>
+        <h2 class="text-2xl font-bold mb-6 dark:text-white">Enregistrer une categorie</h2>
 
         @if ($errors->any())
             <div class="bg-red-100 text-red-800 p-4 mb-4 rounded">
@@ -18,7 +18,7 @@
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 font-bold mb-2 dark:text-white">Name</label>
-                <input type="text" name="name" id="name" class="w-full border-gray-300 rounded-lg p-2" required>
+                <input type="text" name="name" id="name" class="w-full border-gray-300 rounded-lg p-2" >
             </div>
             {{--<div class="">
                 <label for="pays">Pays</label>

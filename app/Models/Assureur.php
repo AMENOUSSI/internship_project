@@ -10,4 +10,9 @@ class Assureur extends Model
     /** @use HasFactory<\Database\Factories\AssureurFactory> */
     use HasFactory;
     protected $fillable = ['name', 'slug'];
+
+    public function polices()
+    {
+        return $this->hasMany(Police::class);
+    }
 }

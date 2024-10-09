@@ -15,4 +15,9 @@ class Affaire extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function polices()
+    {
+        return $this->hasMany(Police::class);
+    }
 }
