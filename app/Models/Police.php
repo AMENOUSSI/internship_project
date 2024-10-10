@@ -14,7 +14,7 @@ class Police extends Model
         'client_id',
         'assureur_id',
         'affaire_id',
-        'assurance_type',
+        'assurance_id',
         'starting_date',
         'ending_date',
         'reference'
@@ -33,5 +33,15 @@ class Police extends Model
     public function assureur()
     {
         return $this->belongsTo(Assureur::class);
+    }
+
+    public function mouvement()
+    {
+        return $this->hasMany(MouvementPolice::class);
+    }
+
+    public function assurance()
+    {
+        return $this->belongsTo(Assurance::class);
     }
 }

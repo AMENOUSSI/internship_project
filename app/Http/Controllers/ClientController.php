@@ -10,7 +10,7 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::latest()->paginate(8);;
         return view('clients.index', compact('clients'));
     }
 
@@ -31,6 +31,7 @@ class ClientController extends Controller
             'birth_date' => 'required|date',
             'gender' => 'required|in:Femme,Homme',
             'comment' => 'nullable|string',
+            'reference' => 'nullable|unique|string',
             'pays_id' => 'required|exists:pays,id'
         ]);
 
@@ -62,6 +63,7 @@ class ClientController extends Controller
             'birth_date' => 'required|date',
             'gender' => 'required|in:Femme,Homme',
             'comment' => 'nullable|string',
+            'reference' => 'nullable|unique|string',
             'pays_id' => 'required|exists:pays,id'
         ]);
 

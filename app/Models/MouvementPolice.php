@@ -7,13 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class MouvementPolice extends Model
 {
-    /** @use HasFactory<\Database\Factories\MouvementPoliceFactory> */
     use HasFactory;
-
-    protected $fillable = ['client_id','comment','ending_date','starting_date','type'];
+    protected $fillable = ['client_id','police_id','comment','ending_date','starting_date','type','reference',];
 
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
+    public function police()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
 }

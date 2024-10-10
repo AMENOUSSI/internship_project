@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Http\Responses\RegisterResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -22,7 +24,21 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Redirection après l'inscription
+        $this->app->instance(RegisterResponse::class, new class extends RegisterResponse {
+            public function toResponse($request)
+            {
+                return redirect()->intended('/home');
+            }
+        });
+
+        // Redirection après la déconnexion
+        $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
+            public function toResponse($request)
+            {
+                return redirect('/');
+            }
+        });
     }
 
     /**
@@ -44,7 +60,7 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
-        Fortify::authenticateUsing(function (Request $request) {
+        /*Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('email', $request->email)->first();
 
             // Vérifiez si l'utilisateur existe et si le mot de passe est correct
@@ -60,7 +76,7 @@ class FortifyServiceProvider extends ServiceProvider
 
             // Renvoie null si les informations d'identification ne sont pas valides
             return null;
-        });
+        });*/
 
         Fortify::loginView(function (){
             return view('auth.login');
@@ -69,6 +85,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::registerView(function (){
             return view('auth.register');
         });
+
 
 
         Fortify::requestPasswordResetLinkView(function () {

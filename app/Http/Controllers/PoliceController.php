@@ -2,90 +2,76 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Affaire;
-use App\Models\Assureur;
-use App\Models\Client;
 use App\Models\Police;
+use App\Models\Client;
+use App\Models\Assureur;
+use App\Models\Affaire;
+use App\Models\Assurance;
 use Illuminate\Http\Request;
 
 class PoliceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $clients = Client::all();
-        $affaires = Affaire::all();
-        $assureurs = Assureur::all();
-        $polices = Police::with(['client', 'assureur', 'affaire'])->get();
-        return view('polices.index',compact('polices','clients','affaires','assureurs'));
-
+        $polices = Police::with(['client', 'assureur', 'affaire', 'assurance'])->get();
+        return view('polices.index', compact('polices'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $clients = Client::all();
-        $affaires = Affaire::all();
         $assureurs = Assureur::all();
-        return view('polices.create',compact('clients','affaires','assureurs'));
+        $affaires = Affaire::all();
+        $assurances = Assurance::all();
+        return view('polices.create', compact('clients', 'assureurs', 'affaires', 'assurances'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'assureur_id' => 'required|exists:assureurs,id',
-            'affaire_id' => 'required|exists:affaires,id',
-            'assurance_type' => 'required|string',
+        $request->validate([
+            'client_id' => 'required',
+            'assureur_id' => 'required',
+            'affaire_id' => 'required',
+            'assurance_id' => 'required',
             'starting_date' => 'required|date',
-            'ending_date' => 'required|date',
-            'reference' => 'nullable|string',
+            'ending_date' => 'nullable|date',
+            'reference' => 'nullable|string|max:255'
         ]);
 
-        Police::updateOrCreate(
-            ['id' => $request->id],
-            $validated
-        );
+        Police::create($request->all());
 
-        return redirect()->route('polices.index')->with('success', 'Police   enregistrée avec succès');
+        return redirect()->route('polices.index')->with('success', 'Police ajoutée avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Police $police)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Police $police)
     {
-        //
+        $clients = Client::all();
+        $assureurs = Assureur::all();
+        $affaires = Affaire::all();
+        $assurances = Assurance::all();
+        return view('polices.edit', compact('police', 'clients', 'assureurs', 'affaires', 'assurances'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Police $police)
     {
-        //
+        $request->validate([
+            'client_id' => 'required',
+            'assureur_id' => 'required',
+            'affaire_id' => 'required',
+            'assurance_id' => 'required',
+            'starting_date' => 'required|date',
+            'ending_date' => 'nullable|date',
+            'reference' => 'nullable|string|max:255'
+        ]);
+
+        $police->update($request->all());
+
+        return redirect()->route('polices.index')->with('success', 'Police mise à jour avec succès.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Police $police)
     {
-        //
+        $police->delete();
+        return redirect()->route('polices.index')->with('success', 'Police supprimée avec succès.');
     }
 }

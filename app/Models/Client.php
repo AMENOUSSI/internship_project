@@ -12,6 +12,7 @@ class Client extends Model
 
     protected $fillable = [
         'pays_id',
+        'reference',
         'comment',
         'gender',
         'birth_date'
@@ -41,4 +42,14 @@ class Client extends Model
     {
         return $this->hasOne(MouvementPolice::class);
     }
+
+    /*protected static function booted()
+    {
+        static::created(function ($client) {
+            $year = \Carbon\Carbon::parse($client->created_date)->format('Y'); // Format de l'année à partir de created_date
+            $id = str_pad($client->id, 2, '0', STR_PAD_LEFT); // ID formaté
+            $client->reference = 'CUS-' . $year . '-' . $id;
+            $client->saveQuietly(); // Sauvegarde sans déclencher d'autres événements
+        });
+    }*/
 }

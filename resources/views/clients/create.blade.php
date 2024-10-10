@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container mx-auto">
-        <h1 class="text-2xl font-bold mb-4 dark:text-white">Créer un Client</h1>
-        <form action="{{ route('clients.store') }}" method="POST" class="bg-white p-6 rounded shadow-md space-y-4 dark:bg-black dark:shadow-md  ">
+        <h1 class="text-3xl font-bold mb-4 dark:text-white">Créer un Client</h1>
+        <form action="{{ route('clients.store') }}" method="POST" class="bg-white p-6 rounded shadow-md space-y-4 dark:bg-gray-700 dark:shadow-md  ">
             @csrf
             <div class="grid grid-cols-3 gap-6">
                 <div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AffaireController;
+use App\Http\Controllers\AssuranceController;
 use App\Http\Controllers\AssureurController;
 use App\Http\Controllers\CategoryPersonController;
 use App\Http\Controllers\ClientController;
@@ -16,9 +17,7 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 })->name('home');
-Route::get('/temp', function () {
-    return view('template');
-});
+
 
 
 Route::middleware('auth')->group(function () {
@@ -37,12 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('mouvements', MouvementPoliceController::class);
     Route::resource('assureurs', AssureurController::class);
     Route::resource('polices',PoliceController::class);
+    Route::resource('assurances',AssuranceController::class);
+    Route::resource('polices',PoliceController::class);
 
 
 
 });
-
-
-// Routes protégées par l'authentification à deux facteurs (2FA)
-
-//require __DIR__.'/auth.php';

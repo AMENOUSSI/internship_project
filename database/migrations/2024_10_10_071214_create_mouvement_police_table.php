@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('mouvement_police', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->enum('type', ['resiliation', 'incorporation', 'retrait']);
             $table->dateTime('starting_date');
-            $table->dateTime('ending_date');
-            $table->text('comment');
+            $table->dateTime('ending_date')->nullable();
+            $table->text('comment')->nullable();
             $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
+            $table->foreignId('police_id')->constrained('police')->cascadeOnDelete();
+            $table->string('reference',)->nullable();
             $table->timestamps();
         });
     }

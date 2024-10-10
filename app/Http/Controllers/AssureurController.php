@@ -34,6 +34,11 @@ class AssureurController extends Controller
         return redirect()->route('assureurs.index');
     }
 
+    public function show(Assureur $assureur)
+    {
+        return view('assureurs.show',compact('assureur'));
+    }
+
     public function edit(Assureur $assureur)
     {
         return view('assureurs.create', compact('assureur'));

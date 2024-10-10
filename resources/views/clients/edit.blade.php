@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container mx-auto">
-        <h1 class="text-2xl font-bold mb-4">Modifier le Client</h1>
-        <form action="{{ route('clients.update', $client->id) }}" method="POST" class="space-y-4">
+        <h1 class="text-3xl text-white font-bold mb-4">Modifier le Client</h1>
+        <form action="{{ route('clients.update', $client->id) }}" method="POST" class="bg-white p-6 rounded shadow-md space-y-4 dark:bg-gray-700 dark:shadow-md">
             @csrf
             @method('PUT')
             <div>
