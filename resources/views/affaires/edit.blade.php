@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="max-w-2xl mx-auto py-8">
-        <h2 class="text-2xl font-bold mb-6">Créer une Nouvelle Affaire</h2>
+        <h2 class="text-2xl font-bold mb-6">Modifier une Affaire existante</h2>
         <form action="{{ route('affaires.update',$affaire->id) }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
             @csrf
             @method('PUT')

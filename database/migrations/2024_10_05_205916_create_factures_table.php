@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
             $table->double('amount');
             $table->dateTime('emit_date');
             $table->dateTime('payment_date');
-            $table->string('status')->defaut('impaye');/*paye,impaye,en cours de payement*/
+            $table->enum('status',['paye','impaye','en cours de payement'])->defaut('impaye');/*paye,impaye,en cours de payement*/
+            $table->string('reference')->nullable();
             $table->timestamps();
         });
     }

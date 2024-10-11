@@ -1,4 +1,4 @@
-<!-- Delete User Modal -->
+<!-- Delete Modal -->
 <div id="delete-user-modal" class="hidden fixed inset-0 flex items-center justify-center z-50">
     <div class="bg-gray-900 dark:bg-gray-100 opacity-50 absolute inset-0" onclick="toggleModal()"></div> <!-- Fond sombre -->
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-800 z-10 max-w-md w-full p-6">

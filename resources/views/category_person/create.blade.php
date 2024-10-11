@@ -32,7 +32,7 @@
 
 
             <div class="flex justify-end">
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-950">
+                <button type="submit" class="bg-blue-800 hover:bg-blue-900 text-white px-4 py-2 rounded dark:hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-950">
                     Enregistrer
                 </button>
             </div>

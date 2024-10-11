@@ -22,7 +22,7 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="min-w-full bg-white text-gray-900 shadow rounded dark:bg-gray-700 dark:text-white font-playfair">
-                <thead class="bg-blue-800 text-gray-100 dark:bg-blue-900 dark:text-white">
+                <thead class="bg-gray-800 text-gray-100 dark:bg-blue-900 dark:text-white">
                 <tr>
                     <th class="py-2 px-4 border-b text-left">ID</th>
                     <th class="py-2 px-4 border-b text-left">Name</th>
@@ -75,21 +75,7 @@
 
 
 
-   <script>
-       let currentCategoryId = null;
 
-       function toggleModal(categoryId = null) {
-           const modal = document.getElementById('delete-user-modal');
-           modal.classList.toggle('hidden');
-           currentCategoryId = categoryId;
-       }
-
-       function confirmDelete() {
-           if (currentCategoryId) {
-               document.getElementById(`delete-form-${currentCategoryId}`).submit();
-           }
-       }
-   </script>
    <script>
        function toggleModal() {
            const modal = document.getElementById('delete-user-modal');

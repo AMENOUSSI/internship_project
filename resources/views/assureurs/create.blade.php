@@ -23,8 +23,8 @@
                 <input type="text" name="slug" id="slug" value="{{ old('slug', $assureur->slug ?? '') }}" class=" dark:bg-gray-800 dark:text-gray-300 w-full p-2 rounded" readonly>
             </div>
 
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">{{ isset($assureur) ? 'Modifier' : 'Ajouter' }}</button>
-            <a href="{{ route('assureurs.index') }}" class="text-gray-400 underline ml-4">Annuler</a>
+            <button type="submit" class="bg-blue-800 hover:bg-blue-900 text-white py-2 px-4 rounded">{{ isset($assureur) ? 'Modifier' : 'Ajouter' }}</button>
+            <a href="{{ route('assureurs.index') }}" class=" bg-gray-200 py-2 px-4 hover:bg-gray-400 rounded ml-4">Annuler</a>
         </form>
     </div>
 

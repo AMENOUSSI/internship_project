@@ -3,63 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Models\Facture;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class FactureController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $factures = Facture::with('client')->get();
+        return view('factures.index', compact('factures'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $clients = Client::all();
+        return view('factures.create', compact('clients'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'amount' => 'required|numeric',
+            'emit_date' => 'required|date',
+            'payment_date' => 'required|date|after_or_equal:emit_date',
+            'status' => 'required|in:paye,impaye,en cours de payement',
+            'reference' => 'nullable|string|max:255',
+        ]);
+
+        Facture::create($request->all());
+        return redirect()->route('factures.index')->with('success', 'Facture ajoutée avec succès');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Facture $facture)
     {
-        //
+        return view('factures.show', compact('facture'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Facture $facture)
     {
-        //
+        $clients = Client::all();
+        return view('factures.edit', compact('facture', 'clients'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Facture $facture)
     {
-        //
+        $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'amount' => 'required|numeric',
+            'emit_date' => 'required|date',
+            'payment_date' => 'required|date|after_or_equal:emit_date',
+            'status' => 'required|in:paye,impaye,en cours de payement',
+            'reference' => 'nullable|string|max:255',
+        ]);
+
+        $facture->update($request->all());
+        return redirect()->route('factures.index')->with('success', 'Facture mise à jour avec succès');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Facture $facture)
     {
-        //
+        $facture->delete();
+        return redirect()->route('factures.index')->with('success', 'Facture supprimée avec succès');
     }
 }
