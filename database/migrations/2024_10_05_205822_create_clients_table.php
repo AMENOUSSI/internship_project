@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('reference')->unique()->nullable();
             $table->string('complete_name');
-            $table->string('type_client');
+            $table->enum('type',['Personne Morale','Personne Physique']);
+            $table->string('adresse');
             $table->string('email')->nullable();
             $table->dateTime('created_date');
             $table->string('phone_number');
             $table->string('birth_date');
             $table->enum('gender',['Femme','Homme']);
             $table->text('comment')->nullable();
+            $table->foreignId('category_people_id')->constrained('category_people')->cascadeOnDelete();
+
             $table->foreignId('pays_id')->constrained('pays')->cascadeOnDelete();
 
             $table->timestamps();

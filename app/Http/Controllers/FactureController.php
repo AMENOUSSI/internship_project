@@ -10,7 +10,7 @@ class FactureController extends Controller
 {
     public function index()
     {
-        $factures = Facture::with('client')->get();
+        $factures = Facture::with('client')->paginate(5);
         return view('factures.index', compact('factures'));
     }
 
@@ -37,6 +37,7 @@ class FactureController extends Controller
 
     public function show(Facture $facture)
     {
+
         return view('factures.show', compact('facture'));
     }
 

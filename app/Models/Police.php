@@ -20,6 +20,18 @@ class Police extends Model
         'reference'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($police) {
+            $year = date('Y');
+            // Si l'ID est auto-incrémenté après l'enregistrement, récupérez-le avec un autre moyen.
+            $nextId = self::max('id') + 1;
+            $police->reference = "POL({$year})-{$nextId}";
+        });
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class);

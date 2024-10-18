@@ -47,7 +47,9 @@
             </tbody>
         </table>
         </div>
-
+    <div class="mt-4">
+        {{ $affaires->links() }}
+    </div>
     </div>
     @include('category_person.modal')
 

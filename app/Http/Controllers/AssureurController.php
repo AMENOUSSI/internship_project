@@ -10,7 +10,7 @@ class AssureurController extends Controller
 {
     public function index()
     {
-        $assureurs = Assureur::all();
+        $assureurs = Assureur::paginate(5);
         return view('assureurs.index', compact('assureurs'));
     }
 

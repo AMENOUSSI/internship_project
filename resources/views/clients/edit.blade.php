@@ -7,13 +7,29 @@
             @csrf
             @method('PUT')
             <div>
+                <label for="type" class="block font-medium text-gray-700">Particulier ou Societe ?</label>
+                <select name="type" id="type" class="w-full border border-gray-300 p-2 rounded" required>
+                    <option value="Personne morale" {{ $client->type == 'Personne morale' ? 'selected' : '' }}>Personne morale</option>
+                    <option value="Personne physique" {{ $client->type == 'Personne physique' ? 'selected' : '' }}>Personne Physique</option>
+                </select>
+                @error('type')
+                <p class="text-red-500 ">{{ $message }}</p>
+                @enderror
+            </div>
+            <div>
                 <label for="complete_name" class="block font-medium text-gray-700">Nom Complet</label>
-                <input type="text" name="complete_name" id="complete_name" value="{{ $client->complete_name }}" class="w-full border border-gray-300 p-2 rounded" required>
+                <input type="text" name="complete_name" id="complete_name" value="{{ $client->complete_name }}" class="w-full border border-gray-300 p-2 rounded">
+                @error('complete_name')
+                <p class="text-red-500 ">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
-                <label for="type_client" class="block font-medium text-gray-700">Type de Client</label>
-                <input type="text" name="type_client" id="type_client" value="{{ $client->type_client }}" class="w-full border border-gray-300 p-2 rounded" required>
+                <label for="adresse" class="block font-medium text-gray-700">Adresse du Client</label>
+                <input type="text" name="adresse" id="adresse" value="{{ $client->adresse }}" class="w-full border border-gray-300 p-2 rounded" >
+                @error('adresse')
+                <p class="text-red-500 ">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
@@ -23,17 +39,32 @@
 
             <div>
                 <label for="created_date" class="block font-medium text-gray-700">Date de Création</label>
-                <input type="datetime-local" name="created_date" id="created_date" value="{{ $client->created_date }}" class="w-full border border-gray-300 p-2 rounded" required>
+                <input type="datetime-local" name="created_date" id="created_date" value="{{ $client->created_date }}" class="w-full border border-gray-300 p-2 rounded" >
+                @error('created_date')
+                <p class="text-red-500 ">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
                 <label for="phone_number" class="block font-medium text-gray-700">Numéro de Téléphone</label>
-                <input type="text" name="phone_number" id="phone_number" value="{{ $client->phone_number }}" class="w-full border border-gray-300 p-2 rounded" required>
+                <input type="text" name="phone_number" id="phone_number" value="{{ $client->phone_number }}" class="w-full border border-gray-300 p-2 rounded">
+                @error('phone_number')
+                <p class="text-red-500 ">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
-                <label for="birth_date" class="block font-medium text-gray-700">Date de Naissance</label>
-                <input type="date" name="birth_date" id="birth_date" value="{{ $client->birth_date }}" class="w-full border border-gray-300 p-2 rounded" required>
+                <label for="category_people_id" class="block font-medium text-gray-700">Secteur d'activite</label>
+                <select name="category_people_id" id="category_people_id" class="w-full border border-gray-300 p-2 rounded">
+                    @foreach($categories as $categorie)
+                        <option value="{{ $categorie->id }}" {{ $client->category_people_id == $categorie->id ? 'selected' : '' }}>
+                            {{ $categorie->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('category_people_id')
+                <p class="text-red-500 ">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
@@ -42,6 +73,16 @@
                     <option value="Femme" {{ $client->gender == 'Femme' ? 'selected' : '' }}>Femme</option>
                     <option value="Homme" {{ $client->gender == 'Homme' ? 'selected' : '' }}>Homme</option>
                 </select>
+                @error('gender')
+                <p class="text-red-500 ">{{ $message }}</p>
+                @enderror
+            </div>
+            <div>
+                <label for="created_date" class="block font-medium text-gray-700">Date de Création</label>
+                <input type="datetime-local" name="created_date" id="created_date" value="{{ $client->created_date }}" class="w-full border border-gray-300 p-2 rounded">
+                @error('created_date')
+                <p class="text-red-500 ">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
@@ -58,6 +99,9 @@
                         </option>
                     @endforeach
                 </select>
+                @error('pays_id')
+                <p class="text-red-500 ">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>

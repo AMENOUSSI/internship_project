@@ -15,4 +15,9 @@ class Assureur extends Model
     {
         return $this->hasMany(Police::class);
     }
+
+    public function assurances()
+    {
+        return $this->hasMany(Assurance::class);
+    }
 }

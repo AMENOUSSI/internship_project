@@ -14,10 +14,11 @@
                 <tr>
                     <th class="py-2 px-4 border-b text-left">Reference</th>
                     <th class="py-2 px-4 border-b">Nom Complet</th>
-                    <th class="py-2 px-4 border-b">Type</th>
+                    <th class="py-2 px-4 border-b">Type de client</th>
                     <th class="py-2 px-4 border-b">Email</th>
                     <th class="py-2 px-4 border-b">Date de Création</th>
                     <th class="py-2 px-4 border-b">Téléphone</th>
+                    <th class="py-2 px-4 border-b">Adresse</th>
                     <th class="py-2 px-4 border-b">Pays</th>
                     <th class="py-2 px-4 border-b">Actions</th>
                 </tr>
@@ -27,11 +28,13 @@
                     <tr class="border-b">
                         <td class="py-2 px-4 text-left">{{ $client->reference }}</td>
                         <td class="py-2 px-4">{{ $client->complete_name }}</td>
-                        <td class="py-2 px-4">{{ $client->type_client }}</td>
+                        <td class="py-2 px-4">{{ $client->type }}</td>
                         <td class="py-2 px-4">{{ $client->email }}</td>
                         <td class="py-2 px-4">{{ \Carbon\Carbon::parse($client->created_date)->format('d M,Y') }}</td>
                         <td class="py-2 px-4">{{ $client->phone_number }}</td>
+                        <td class="py-2 px-4">{{ $client->adresse  }}</td>
                         <td class="py-2 px-4">{{ $client->pays->name  }}</td>
+
                         <td class="py-2 px-4 flex space-x-2">
                             <a href="{{ route('clients.edit', $client->id) }}" class="inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:bg-indigo-900 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
@@ -51,10 +54,11 @@
                 @endforeach
                 </tbody>
             </table>
-           <div class="mt-2">
-               {{ $clients->links() }}
-           </div>
 
+
+        </div>
+        <div class="mt-2">
+            {{ $clients->links() }}
         </div>
     </div>
 

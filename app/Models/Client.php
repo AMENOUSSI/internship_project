@@ -18,8 +18,10 @@ class Client extends Model
         'birth_date'
         ,'phone_number',
         'created_date',
+        'type',
+        'adresse',
         'email',
-        'type_client',
+        'category_people_id',
         'complete_name'
     ];
 
@@ -28,14 +30,24 @@ class Client extends Model
         return $this->belongsTo(Pays::class);
     }
 
+    public function assurances()
+    {
+        return $this->hasMany(Assurance::class);
+    }
+
     public function affaires()
     {
         return $this->hasMany(Affaire::class);
     }
 
-    public function polices()
+    public function prime()
     {
-        return $this->hasMany(Police::class);
+        return $this->belongsTo(Prime::class);
+    }
+
+    public function categoryPeople()
+    {
+        return $this->belongsTo(CategoryPerson::class);
     }
 
     public function mouvement()

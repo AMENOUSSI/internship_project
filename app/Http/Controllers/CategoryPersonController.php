@@ -10,7 +10,7 @@ class CategoryPersonController extends Controller
 {
     public function index()
     {
-        $categories = CategoryPerson::paginate(10);
+        $categories = CategoryPerson::paginate(5);
         return view('category_person.index', compact('categories'));
     }
 

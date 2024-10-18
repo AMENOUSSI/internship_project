@@ -11,7 +11,7 @@ class MouvementPoliceController extends Controller
 {
     public function index()
     {
-        $mouvements = MouvementPolice::with(['client','police'])->get();
+        $mouvements = MouvementPolice::with('client')->paginate(5);
         return view('mouvements.index', compact('mouvements'));
     }
 
@@ -19,18 +19,18 @@ class MouvementPoliceController extends Controller
     {
         $polices = Police::all();
         $clients = Client::all(); // Récupérer tous les clients
-        return view('mouvements.create', compact('clients','polices'));
+        return view('mouvements.form', compact('clients','polices'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required|in:resiliation,incorporation,retrait',
+            'type' => 'required|in:renouvellement,incorporation,retrait',
             'starting_date' => 'required|date',
             'ending_date' => 'required|date',
             'comment' => 'nullable|string',
             'client_id' => 'required|exists:clients,id',
-            'police_id' => 'required|exists:police,id',
+
         ]);
 
         MouvementPolice::create($request->all());
@@ -46,18 +46,17 @@ class MouvementPoliceController extends Controller
     {
         $polices = Police::all();
         $clients = Client::all(); // Récupérer tous les clients
-        return view('mouvements.edit', compact('mouvement', 'clients','polices'));
+        return view('mouvements.form', compact('mouvement', 'clients','polices'));
     }
 
     public function update(Request $request, MouvementPolice $mouvement)
     {
         $request->validate([
-            'type' => 'required|in:resiliation,incorporation,retrait',
+            'type' => 'required|in:renouvellement,incorporation,retrait',
             'starting_date' => 'required|date',
             'ending_date' => 'required|date',
             'comment' => 'nullable|string',
             'client_id' => 'required|exists:clients,id',
-            'police_id' => 'required|exists:police,id',
         ]);
 
         $mouvement->update($request->all());

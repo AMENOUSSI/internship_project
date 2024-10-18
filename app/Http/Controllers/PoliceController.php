@@ -13,7 +13,7 @@ class PoliceController extends Controller
 {
     public function index()
     {
-        $polices = Police::with(['client', 'assureur', 'affaire', 'assurance'])->get();
+        $polices = Police::with(['client', 'assureur', 'affaire', 'assurance'])->paginate(5);
         return view('polices.index', compact('polices'));
     }
 

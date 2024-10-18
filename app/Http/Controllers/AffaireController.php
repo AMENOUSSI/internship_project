@@ -9,7 +9,7 @@ class AffaireController extends Controller
 {
     public function index()
     {
-        $affaires = Affaire::all();
+        $affaires = Affaire::paginate(5);
         return view('affaires.index', compact('affaires'));
     }
 

@@ -11,7 +11,7 @@ class AssuranceController extends Controller
 {
     public function index()
     {
-        $assurances = Assurance::with('client', 'assureur', 'affaire')->get();
+        $assurances = Assurance::with('client', 'assureur', 'affaire')->paginate(5);
         return view('assurances.index', compact('assurances'));
     }
 

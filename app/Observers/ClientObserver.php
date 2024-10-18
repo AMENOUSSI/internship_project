@@ -33,16 +33,16 @@ class ClientObserver
         }
 
         // Générer l'ID formaté
-        $id = str_pad(self::$lastId, 2, '0', STR_PAD_LEFT);
+        $id = str_pad(self::$lastId, 5, '0', STR_PAD_LEFT);
 
         // Générer la référence
-        $client->reference = "CUS-$currentYear-$id";
+        $client->reference = "CUS$currentYear-$id";
 
         // Vérifier l'unicité de la référence
         while (Client::where('reference', $client->reference)->exists()) {
             self::$lastId++;
-            $id = str_pad(self::$lastId, 2, '0', STR_PAD_LEFT);
-            $client->reference = "CUS-$currentYear-$id";
+            $id = str_pad(self::$lastId, 5, '0', STR_PAD_LEFT);
+            $client->reference = "CUS$currentYear-$id";
         }
     }
 

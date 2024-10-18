@@ -5,6 +5,7 @@ use App\Http\Controllers\AssuranceController;
 use App\Http\Controllers\AssureurController;
 use App\Http\Controllers\CategoryPersonController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\FactureController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MouvementPoliceController;
@@ -42,5 +43,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('polices',PoliceController::class);
     Route::resource('primes',PrimeController::class);
     Route::resource('factures',FactureController::class);
+    Route::resource('commissions',CommissionController::class);
 
 });

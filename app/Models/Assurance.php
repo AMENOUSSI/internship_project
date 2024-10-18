@@ -29,4 +29,5 @@ class Assurance extends Model
     {
         return $this->belongsTo(Affaire::class);
     }
+
 }

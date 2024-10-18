@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('primes', function (Blueprint $table) {
+        Schema::create('commissions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
-            $table->double('prime_nette');
-            $table->double('assessors');
-            $table->double('tax');
-            $table->string('type_risque')->nullable();
-            $table->string('type_prime')->nullable();
-            $table->double('total');
+            $table->foreignId('assurance_id')->constrained('assurances')->cascadeOnDelete();
+            $table->foreignId('assureur_id')->constrained('assureurs')->cascadeOnDelete();
+            $table->string('taux');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('primes');
+        Schema::dropIfExists('commissions');
     }
 };
